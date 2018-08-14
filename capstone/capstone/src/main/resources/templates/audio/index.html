@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+
+<body class="container">
+
+<h1 th:text="${title}">Default Title</h1>
+
+<nav th:replace="fragments :: navigation"></nav>
+
+<p th:unless="${audios} and ${audios.size()}">no audio :(</p>
+
+
+<table class="table">
+
+    <tr>
+        <th>Name</th>
+        <th>Filepath</th>
+
+    </tr>
+
+    <tr th:each="audio : ${audios}">
+        <td th:text="${audio.name}"></td>
+        <td th:text="${audio.filepath}"></td>
+        <td>
+            <audio th:id="${audio.name}" controls>
+                <source
+                    type="audio/mpeg"
+                    th:src="${audio.filepath}"/>
+                    Your browser does not support the <code>audio</code> element.
+            </audio>
+        </td>
+
+
+
+    </tr>
+
+</table>
+
+<nav th:fragment="navigation">
+    <a href="/audio/add">Add</a> |
+    <a href="/audio/remove">Remove</a> |
+
+</nav>
+
+</body>
+</html>
